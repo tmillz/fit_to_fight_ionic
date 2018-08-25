@@ -12,40 +12,53 @@
      
 	<!--Gender--> 
 	<ion-item>
-	  <ion-label>Gender1:</ion-label>
+	  <ion-label>Gender:</ion-label>
 	  <ion-select [(ngModel)]="formData.gender" multiple="false">
-		<ion-option>Male</ion-option>
-		<ion-option>Female</ion-option>
+	  <ion-option>Male</ion-option>
+	  <ion-option>Female</ion-option>
 	  </ion-select>
 	</ion-item>
 	  
 	  <!--Age-->
 	  <ion-item>
-		<ion-label fixed>Age:</ion-label>
-		<ion-input type="number" value=""></ion-input>
+		<ion-label>Age:</ion-label>
+		<ion-select [(ngModel)]="formData.age" multiple="false">
+		<ion-option>Less than 30</ion-option>
+		<ion-option>30 to 39</ion-option>
+		<ion-option>40 to 49</ion-option>
+		<ion-option>50 to 59</ion-option>
+		<ion-option>60 and over</ion-option>
+	  </ion-select>
 	  </ion-item>
 	  
-	  <!--Waist-->
+	  <!--waist-->
+	  <ion-item-sliding>
 	  <ion-item>
 		<ion-label fixed>Waist:</ion-label>
-		<ion-input type="number" [(ngModel)]="formData.waist" value=""></ion-input>
-		<ion-item>
-		<ion-checkbox></ion-checkbox>
-		</ion-item>
+		<ion-input type="number" #waist [(ngModel)]="formData.waist"></ion-input>
 		<button ion-button icon-only clear item-right (click)="toggle()">
           <ion-icon name="md-swap"></ion-icon>
         </button>
 		<ion-badge item-right>{{formData.waist}}</ion-badge>
-	  </ion-item>
+		</ion-item>
+		<ion-item-options>
+          <button ion-button color="secondary">Exempt</button>
+        </ion-item-options>  
+	  </ion-item-sliding>
 	  
-	  <!-- Waist Slider -->
+	  <!-- waist Slider -->
 	  <ion-item *ngIf="tof">
-		<ion-range min="0" max="100" [(ngModel)]="formData.waist">
-		  <ion-label range-left>0</ion-label>
-		  <ion-label range-right>100</ion-label>
-		</ion-range>
-	  </ion-item>
-	  
+			<!--ion-range  min="20" max="50" [(ngModel)]="formData.waist">
+		  <ion-label range-left>20</ion-label>
+		  <ion-label range-right>50</ion-label>
+		</ion-range-->
+		<float-range min="20" max="50" pin="true" step="0.5" snaps="false" [(_ngModel)]="formData.waist">
+			</float-range>
+		</ion-item>
+		
+		<!--float-range min="20" max="50" pin="true" step="0.5" snaps="false" [_ngModel]="formData.waist">
+		</float-range-->
+	  	  
 	  <!--Situps-->
 	  <ion-item>
 		<ion-label fixed>Situps:</ion-label>
@@ -92,6 +105,17 @@
 	      </ion-select>
 	  </ion-item>
 	  
+	  <!-- Cardio Adjustment -->
+	  <ion-item>
+	    <ion-label>Cardio Adjustment:</ion-label>
+	      <ion-select [(ngModel)]="formData.cardioAdjust" multiple="false">
+		    <ion-option>Over 4000ft</ion-option>
+		    <ion-option>Over 6000ft</ion-option>
+		    <ion-option>Over 8000ft</ion-option>
+		    <ion-option>Over 10000ft</ion-option>
+	      </ion-select>
+	  </ion-item>
+	  
 	  <!-- Cardio Time -->
 	  <ion-item>
 		<ion-label>Cardio Time:</ion-label>
@@ -99,4 +123,7 @@
 		<ion-badge item-right>{{formData.cardioTime}}</ion-badge>
 	  </ion-item>
 </ion-list>
-<button ion-button full color="light">Save</button></ion-content>
+<button ion-button block color="light">Save</button>
+
+</ion-content>
+
